@@ -7,8 +7,8 @@
      '(1 1)
      (lazy-seq 
         (conj (fib-seq (dec n)) ;;previous sequence
-              (+ (last (fib-seq (dec n))) (last (butlast (fib-seq (dec n)))))))) ;; new member to add
-)
+              (+ (first (fib-seq (dec n))) (second (fib-seq (dec n)))))))) ;; new member to add
+
 
 
 
