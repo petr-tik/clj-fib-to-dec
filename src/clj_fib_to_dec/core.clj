@@ -12,7 +12,7 @@
 (defn fib-play
   [num]
   (loop [counter 2]
-   (if (> num (first (fib-seq counter)))
+   (if (< num (first (fib-seq counter)))
     (fib-seq (dec counter))
     (recur (inc counter)))))
 
