@@ -17,6 +17,13 @@ If we use the same form as for writing binary, with the Fibonacci sequence inste
 1	0	1	0	0	1	0
 ```
 
+The no-repeats property applies to the Fibonacci-based encoding. There can be multiple ways of representing a decimal number:
+
+```
+25 = 21 + 3 + 1
+25 = 21 + 2 + 1 + 1
+```
+
 ## License
 
 Copyright © 2016 FIXME
