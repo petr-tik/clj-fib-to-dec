@@ -2,7 +2,7 @@
 
 ## Converter from decimal to Fibonacci sequence (and vice versa). 
 
-https://www.reddit.com/r/dailyprogrammer/comments/5196fi/20160905_challenge_282_easy_unusual_bases/
+(Source: [Daily programmer in Reddit](https://www.reddit.com/r/dailyprogrammer/comments/5196fi/20160905_challenge_282_easy_unusual_bases/))
 
 The Fibonacci Sequence has a similar property that any positive integer can be written in the form of Fibonacci numbers (with no repeats). For example:
 
