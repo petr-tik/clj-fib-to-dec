@@ -1,7 +1,10 @@
 (ns clj-fib-to-dec.core)
 
 (defn fib-seq
-  "Generates a collection that is Fibonacci sequence of length n"
+  "Generates a collection that is Fibonacci sequence of length n
+  ===> (fib-seq 5) 
+  ===> (5 3 2 1 1)
+  "
   [n]
   (if (= 2 n)
      '(1 1)
@@ -22,31 +25,45 @@
 
 (defn-
   char2num
+  "Returns the int value of a symbol (\2 \4 etc.)
+  ===> (char2num \2) 
+  ===> 2
+  "
   [n]
   (- (int n) (int \0)))
 
-(defn- 
+(defn-
   chop-in-parts
+  "Turns a string of digits into a collection of ints using char2num
+  ===> (chop-in-parts \"10001\") 
+  ===> (1 0 0 0 1)
+  "
   [number]
   (map char2num number))
 
 (defn-
   get-fib-values
+  "Given a string of a number in fibonacci base, returns a collection 
+  where every element at idx is the product of 1 or 0 from fib_num string 
+  and fibonacci value at idx
+  ===> (get-fib-values \"1001\")
+  ===> (1 0 0 3)
+"
   [fib_num]
   (->> fib_num
     chop-in-parts
     reverse
     (map * (fib))))
 
-;; (fib2dec "1001") -> 4
+
 (defn
   fib2dec
+  "Given a number in fibonacci base (as a string) return the decimal value
+  ===> (fib2dec \"1001\") 
+  ===> 4
+  "
   [fib_num]
   (reduce + (get-fib-values fib_num)))
-
-;;(defn dec-to-fib
-;;  "Given a decimal number, return a collection of 1s and 0s for Fibonacci base"
-;;)  
 
 
 (defn foo
