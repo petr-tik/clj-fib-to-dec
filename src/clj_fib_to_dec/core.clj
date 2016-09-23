@@ -62,49 +62,75 @@
   ===> (fib2dec \"1001\") 
   ===> 4
   "
-  [fib_num]
-  (reduce + (get-fib-values fib_num)))
+  [fib-num]
+  (reduce + (get-fib-values fib-num)))
 
+;;;;;
+;;   dec2fib and its helpers
+;;;;;
 
 (defn 
   fib-digits-from-dec
   "Given a decimal number and a sequence of relevant (less or equal to dec-num) 
-  fibonacci numbers, returns a vector of digits of fibonacci base
+  fibonacci numbers, returns a string with dec-num in fibonacci base
   ===> (fib-digits-from-dec '(13 8 5 3 2 1 1) 14)
   ===> \"1000010\"
   "
   ([fib-seq dec-num]
-  (fib-digits-from-dec fib-seq dec-num (vector)))
+  (fib-digits-from-dec fib-seq dec-num (vector))) 
+  ;; use a vector, so you can conj values to the end
   ([fib-seq dec-num digit-vec]
   (cond
-   (empty? fib-seq)
+   (empty? fib-seq) ;; cannot use lazy-seqs. Lazy sequence is never empty! 
        (reduce str digit-vec)
-   (or (= 0 dec-num)
+   (or (= 0 dec-num) 
        (< dec-num (first fib-seq)))
     ;; if decimal number is less than the first of fib-seq 
     ;; we won't be using that element of the fib-seq. It will be used zero times. 
-       (fib-digits-from-dec (rest fib-seq) dec-num (conj digit-vec 0))
+       (fib-digits-from-dec 
+        (rest fib-seq) 
+        dec-num ;; dec-num isn't big enough to factor out this fib value
+        (conj digit-vec 0)) ;; this fib value was used 0 times
     ;; otherwise
    (>= dec-num (first fib-seq))
-   (fib-digits-from-dec (rest fib-seq) (- dec-num (first fib-seq)) (conj digit-vec 1)))))
+   (fib-digits-from-dec 
+    (rest fib-seq) 
+    (- dec-num (first fib-seq)) 
+    (conj digit-vec 1)))))
 
+(defn 
+  fib-seq-up-to-dec
+  "Given a dec-num, returns a Fibonacci sequence (non-lazy) 
+  increasing from right to left, where the leftmost (first) member 
+  is less than or equal to dec-num
+  ===> (fib-seq-up-to-dec 27) 
+  ===> (21 13 8 5 3 2 1 1)
+  "
+  [dec-num]
+  (loop [counter 2]
+    (if (< dec-num (first (fib-seq counter)))
+      (fib-seq (dec counter))
+      (recur (inc counter)))))
 
 (defn
   dec2fib
   "Given a number in decimal form, returns a string with number in fibonacci base
+  Uses 
+     fib-digits-from-dec 
+     fib-seq-up-to-dec
+  eg.
   ===> (dec2fib 27) 
-  ===> \"10010010\""
+  ===> \"10010010\"
+  "
   ;; given a decimal, finds the greatest fib number that is less or equal to the decimal.
-  ;; generate such a fib seq. 
+  ;; generate such a fib seq, where the max member 
+  ;; is the biggest possible member of fib-seq smaller than dec-num
   ;; eg. 27 -> 
   ;; fib-seq    (21 13 8 5 3 2 1 1)
   ;; nums-used  (1  0  0 1 0 0 1 0)
   ;; then return a sequence of 1s or 0s for each fib number that is used or not
-
-  [dec_num]
-  (dec dec_num)
-  ;;(map bit-or (chop-in-parts "1000") (chop-in-parts "0001") (chop-in-parts "0100")) 
-)
+  [dec-num]
+  (fib-digits-from-dec (fib-seq-up-to-dec dec-num) dec-num))
 
 
 (defn foo
