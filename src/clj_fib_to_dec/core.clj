@@ -133,7 +133,12 @@
   (fib-digits-from-dec (fib-seq-up-to-dec dec-num) dec-num))
 
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn
+  test-both
+  [dec-num]
+  (= dec-num (fib2dec (dec2fib dec-num))))
+
+(defn main
+  "testing dec2fib and fib2dec"
+  []
+  (reduce = (map test-both [1 5 8 13 37 57])))
