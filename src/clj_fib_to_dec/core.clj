@@ -23,7 +23,7 @@
   ([] (fib 1 1))
   ([n-1 n-2] (lazy-seq (cons n-2 (fib (+ n-1 n-2) n-1)))))
 
-(defn-
+(defn
   char2num
   "Returns the int value of a symbol (\2 \4 etc.)
   ===> (char2num \\2) 
@@ -32,7 +32,7 @@
   [n]
   (- (int n) (int \0)))
 
-(defn-
+(defn
   chop-in-parts
   "Turns a string of digits into a collection of ints using char2num
   ===> (chop-in-parts \"10001\") 
@@ -132,13 +132,12 @@
   [dec-num]
   (fib-digits-from-dec (fib-seq-up-to-dec dec-num) dec-num))
 
-
 (defn
-  test-both
+  helper
+  "Returns true if a given decimal number, converted to fibonacci base 
+  and back to decimal gives the same result
+  ===> (test-dec-and-fib 5)
+  ===> true
+  " 
   [dec-num]
   (= dec-num (fib2dec (dec2fib dec-num))))
-
-(defn main
-  "testing dec2fib and fib2dec"
-  []
-  (reduce = (map test-both [1 5 8 13 37 57])))
