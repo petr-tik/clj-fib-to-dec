@@ -24,15 +24,15 @@ The no-repeats property applies to the Fibonacci-based encoding. There can be mu
 
 ### Basic puzzle
 
-Write dec-to-fib and fib-to-dec  converters.
+- [x] Write dec-to-fib and fib-to-dec converters. 
 
 ### Harder
 
-Make sure the dec-to-fib converter outputs a number with the fewest 1's
+- [x] Make sure the dec-to-fib converter outputs a number with the fewest 1's. The current method implements an algo with the fewest 1s
 
 ### Even more interesting 
 
-Make sure the dec-to-fib converter outputs a number with the most 1's
+- [ ] Make sure the dec-to-fib converter outputs a number with the most 1's
 
 
 ## License
